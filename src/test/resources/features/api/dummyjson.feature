@@ -4,43 +4,40 @@
 
   @smoke
   Сценарий: Авторизация и получение профиля по токену
-    * dummyjson > Отправляю POST запрос на '/auth/login' по шаблону 'dummyjson/login' и сохраняю ответ как 'login':
+    * dummyjson > Авторизуюсь, сохраняю токен как 'token' и ответ как 'login':
       | username      | emilys     |
       | password      | emilyspass |
       | expiresInMins | 5          |
-    * Проверяю, что код ответа 'login' равен 200
-    * Сохраняю объект из json 'login' по пути:
-      | token | $.accessToken |
     * Проверяю в json 'login' поля:
-      | $.username    | emilys    |
-      | $.accessToken | [\w.-]+   |
+      | $.username    | emilys  |
+      | $.accessToken | [\w.-]+ |
+    * dummyjson > Получаю профиль пользователя по токену '${token}' и сохраняю как 'profile'
+    * Проверяю в json 'profile' поля:
+      | $.username | emilys |
+      | $.id       | \d+    |
 
   Сценарий: Поиск товаров с параметрами запроса
-    * dummyjson > Отправляю GET запрос на '/products/search' с параметрами и сохраняю ответ как 'search':
+    * dummyjson > Ищу товары и сохраняю результат как 'search':
       | q     | phone |
       | limit | 5     |
-    * Проверяю, что код ответа 'search' равен 200
     * Проверяю в json 'search' поля:
-      | $.limit          | 5      |
-      | $.products[0].id | \d+    |
+      | $.limit          | 5   |
+      | $.products[0].id | \d+ |
 
   Сценарий: Создание товара по шаблону
     * Сохраняю значения в переменную:
       | title | Ноутбук-@{RandomUtils.randomInt(1000, 9999)} |
-    * dummyjson > Отправляю POST запрос на '/products/add' по шаблону 'dummyjson/product' и сохраняю ответ как 'created':
+    * dummyjson > Создаю товар и сохраняю как 'created':
       | title | ${title} |
-    * Проверяю, что код ответа 'created' равен 201
     * Проверяю в json 'created' поля:
       | $.id       | \d+      |
       | $.title    | ${title} |
       | $.category | laptops  |
 
   Сценарий: Удаление товара
-    * dummyjson > Отправляю DELETE запрос на '/products/1' и сохраняю ответ как 'deleted'
-    * Проверяю, что код ответа 'deleted' равен 200
+    * dummyjson > Удаляю товар '1' и сохраняю ответ как 'deleted'
     * Проверяю в json 'deleted' поля:
       | $.isDeleted | true |
 
-  Сценарий: Несуществующий товар возвращает 404
-    * dummyjson > Отправляю GET запрос на '/products/0' и сохраняю ответ как 'missing'
-    * Проверяю, что код ответа 'missing' равен 404
+  Сценарий: Несуществующий товар не найден
+    * dummyjson > Проверяю, что товар '0' не найден

@@ -84,4 +84,9 @@ public class ServiceConfiguration {
     public ServiceConfig wiremockService() {
         return getService("wiremock");
     }
+
+    @Bean
+    public ServiceConfig dummyjsonService() {
+        return getService("dummyjson");
+    }
 }

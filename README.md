@@ -42,16 +42,20 @@ src/test/java/dev/kozhevnikov/autotests
 ├── RunCucumberTest  точка запуска через JUnit Platform Suite
 ├── config/          Spring-контекст Cucumber, WebDriver, Atlas (scope cucumber-glue)
 ├── glue/, hooks/    хуки: стартовые данные, очистка контекста и заглушек, браузер, вложения при падении
-├── steps/           общие шаги: API, JSON/XML, переменные, файлы, UI, DevTools, WireMock, Elastic
+├── steps/           шаги сервисов и сайтов (DummyJsonApiSteps, SauceDemoSteps) и общие: JSON/XML, переменные, файлы, UI, DevTools, WireMock, Elastic
 └── web/             элементы, сайты и страницы Atlas, матчеры
 ```
 
 Ключевые решения:
 
 - **Реестр сервисов.** Все сервисы описаны в `services.properties`: URL с плейсхолдером стенда,
-  таймаут и заголовки по умолчанию. Шаг ссылается на сервис по имени: `dummyjson > Отправляю GET ...`.
+  таймаут и заголовки по умолчанию. Часто используемые сервисы доступны бинами, например `dummyjsonService`.
+- **Шаг — это бизнес-действие.** Сценарий не знает про URI, HTTP-метод и коды ответа:
+  `dummyjson > Создаю товар и сохраняю как 'created'`. Эндпоинт, метод, шаблон тела и ожидаемый код
+  зашиты в шаге сервиса (`DummyJsonApiSteps`). Сценарии читаются как бизнес-процесс,
+  а изменение API правится в одном месте.
 - **Один HTTP-шлюз.** Все запросы идут через `ServiceUtils`, поэтому логирование, таймауты
-  и вложения в отчёт настроены в одном месте. 4xx и 5xx не бросают исключение, код проверяется шагом.
+  и вложения в отчёт настроены в одном месте. 4xx и 5xx не бросают исключение, код проверяется внутри шага.
 - **Контекст сценария.** Переменные хранятся в `AutoTestContext` на `ThreadLocal`, а WebDriver
   и Atlas живут в области `cucumber-glue`. Поэтому сценарии изолированы и запускаются параллельно.
 - **Подстановки.** В шагах, таблицах и шаблонах работают `${var}`, `${var:значение по умолчанию}`
@@ -102,16 +106,34 @@ allure serve target/allure-results
    ```
    Плейсхолдер заполняется из таблицы шага, затем из контекста сценария,
    затем значением по умолчанию после двоеточия (Groovy-выражение).
-3. Написать сценарий на общих шагах:
+3. Добавить бин сервиса в `ServiceConfiguration` и класс шагов `OrdersApiSteps`:
+   ```java
+   @When("^orders > Создаю заказ и сохраняю как '(.+)':$")
+   public void createOrder(String responseName, Map<String, String> params) {
+       String uri = "/orders";
+       String body = commonUtils.getEnrichedTemplate("orders/create", params);
+
+       AtHttpRequest request = serviceUtils.generateHttpRequest(ordersService)
+               .resolveUri(uri)
+               .setMethod(HttpMethod.POST)
+               .setBody(jsonUtils.toJson(jsonUtils.unify(body)));
+       AtHttpResponse<Object> response = serviceUtils.sendHttpRequest(request);
+       Assertions.assertThat(response.getStatusCode())
+               .withFailMessage("Неверный код ответа при создании заказа")
+               .isEqualTo(201);
+
+       AutoTestContext.put(responseName, response.getBody());
+   }
+   ```
+4. Написать сценарий:
    ```gherkin
-   * orders > Отправляю POST запрос на '/orders' по шаблону 'orders/create' и сохраняю ответ как 'order':
+   * orders > Создаю заказ и сохраняю как 'order':
      | productId | ${productId} |
      | quantity  | 2            |
-   * Проверяю, что код ответа 'order' равен 201
    * Сохраняю объект из json 'order' по пути:
      | orderId | $.id |
    ```
-4. Для нового фронта: интерфейс сайта в `web/sites/front`, имя в `Sites`, страницы в `web/pages`.
+5. Для нового фронта: интерфейс сайта в `web/sites/front`, имя в `Sites`, страницы в `web/pages`.
 
 Примеры: `src/test/resources/features/api/dummyjson.feature`, `src/test/resources/features/ui/saucedemo.feature`.
 
@@ -119,10 +141,8 @@ allure serve target/allure-results
 
 | Шаг | Назначение |
 |---|---|
-| `<сервис> > Отправляю GET\|DELETE запрос на '<путь>' и сохраняю ответ как '<имя>'` | запрос без тела |
-| `<сервис> > Отправляю ... с параметрами и сохраняю ответ как '<имя>':` | query-параметры из таблицы |
-| `<сервис> > Отправляю POST\|PUT\|PATCH запрос на '<путь>' по шаблону '<шаблон>' и сохраняю ответ как '<имя>':` | тело из шаблона, значения из таблицы |
-| `Проверяю, что код ответа '<имя>' равен <код>` | проверка статуса |
+| `dummyjson > Авторизуюсь, сохраняю токен как '<имя>' и ответ как '<имя>':` | пример шага сервиса: POST по шаблону, проверка кода, сохранение токена |
+| `dummyjson > Ищу товары и сохраняю результат как '<имя>':` | пример шага сервиса: GET с query-параметрами из таблицы |
 | `Проверяю в json '<имя>' поля:` | JsonPath → регулярное выражение, мягкие проверки |
 | `Сохраняю объект из json '<имя>' по пути:` | извлечение значений в контекст |
 | `Создаю json по шаблону '<шаблон>' и сохраняю как: '<имя>':` | шаблоны тел запросов |
