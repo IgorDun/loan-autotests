@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"930700849940de80aea0e27eb7517e82","name":"REST API демо-сервиса dummyjson.com","statistic":{"failed":0,"broken":0,"skipped":0,"passed":5,"unknown":0,"total":5}},{"uid":"5627a22538c8545bcc0c7591da57f6e7","name":"Покупка в демо-магазине saucedemo.com","statistic":{"failed":0,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":3}}]}
