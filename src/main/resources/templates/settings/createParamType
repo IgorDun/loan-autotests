@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "dataType": "${dataType}",
+  "defaultValue": "${defaultValue}",
+  "paramDescription": "${paramDescription}",
+  "paramName": "${paramName}",
+  "paramNameRu": "${paramNameRu}",
+  "paramTypeId": "${paramTypeId}",
+  "referenceType": "${referenceType}",
+  "subjectType": "${subjectType}"
+}

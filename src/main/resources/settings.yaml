@@ -1,0 +1,40 @@
+#######################################
+# Пример декларативных стартовых данных.
+# Группа (ключ) — команда или эпик; start-data.keys фильтрует группы по префиксу.
+# Для каждой записи фреймворк ищет тип параметра и настройку, создаёт недостающее
+# и обновляет значение, если оно отличается (find-or-create).
+#
+# - setting:
+#     settingValue: значение настройки
+#     partyId: идентификатор организации (необязательно)
+#   param:
+#     paramName: системное имя
+#     paramNameRu: описание
+#     dataType: BOOLEAN | STRING | NUMBER
+#     defaultValue: значение по умолчанию (необязательно)
+#   subject:
+#     subjectType: CREATION_CHANNEL | PROCESS | PARTY | RELATION
+#     creationChannel: канал (для CREATION_CHANNEL)
+#     processCode: код процесса (для PROCESS)
+#######################################
+settings:
+  TEAM1:
+    - setting:
+        settingValue: true
+      param:
+        paramName: chatEnabled
+        paramNameRu: Включение чата поддержки
+        dataType: BOOLEAN
+        defaultValue: false
+      subject:
+        subjectType: CREATION_CHANNEL
+        creationChannel: WEB
+    - setting:
+        settingValue: 30
+      param:
+        paramName: applicationTtlDays
+        paramNameRu: Срок жизни заявки в днях
+        dataType: NUMBER
+      subject:
+        subjectType: PROCESS
+        processCode: LOAN_APPLICATION

@@ -1,0 +1,18 @@
+# Сборка и IDE
+target/
+*.iml
+.idea/
+.vscode/
+
+# Отчёты
+allure-results/
+allure-report/
+.allure/
+
+# Артефакты прогонов
+src/test/resources/files/screenshots/
+*.log
+
+# Локальные секреты
+.env
+*.local.properties

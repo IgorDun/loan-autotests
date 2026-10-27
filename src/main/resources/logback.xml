@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%magenta(%d{yyyy MMM dd HH:mm:ss.SSS}) - %-5level%n%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="RP" class="com.epam.reportportal.logback.appender.ReportPortalAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n</pattern>
+            <pattern>[%t] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ALLURE_APPENDER" class="dev.kozhevnikov.autotests.logger.AllureAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n</pattern>
+            <pattern>[%t] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="binary_data_logger" level="TRACE" additivity="false">
+        <appender-ref ref="RP"/>
+    </logger>
+
+    <logger name="com.epam.reportportal.service" level="WARN"/>
+    <logger name="com.epam.reportportal.utils" level="WARN"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="com.zaxxer.hikari" level="ERROR"/>
+
+    <root level="INFO">
+        <appender-ref ref="ALLURE_APPENDER"/>
+        <appender-ref ref="RP"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
