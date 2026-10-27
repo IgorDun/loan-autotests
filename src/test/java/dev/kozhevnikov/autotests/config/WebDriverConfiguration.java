@@ -64,6 +64,13 @@ public class WebDriverConfiguration {
                 chromeOptions.addArguments("--use-fake-ui-for-media-stream");
                 chromeOptions.addArguments("--use-fake-device-for-media-stream");
                 chromeOptions.addArguments("--ignore-certificate-errors");
+                // Чистый профиль Chrome после входа показывает окно менеджера паролей
+                // («пароль найден в утечке»), которое перехватывает клики по странице
+                chromeOptions.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding");
+                chromeOptions.setExperimentalOption("prefs", Map.of(
+                        "credentials_enable_service", false,
+                        "profile.password_manager_enabled", false,
+                        "profile.password_manager_leak_detection", false));
                 // Без окна браузера (CI): -Dheadless=true или переменная окружения HEADLESS=true
                 if (Boolean.getBoolean("headless") || Boolean.parseBoolean(System.getenv("HEADLESS"))) {
                     chromeOptions.addArguments("--headless=new", "--window-size=1920,1080");
