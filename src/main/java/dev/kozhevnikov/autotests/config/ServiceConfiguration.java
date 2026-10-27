@@ -76,8 +76,18 @@ public class ServiceConfiguration {
      * Бин на каждый часто используемый сервис. Остальные сервисы доступны по имени через {@link #getService(String)}.
      */
     @Bean
-    public ServiceConfig settingsService() {
-        return getService("settings");
+    public ServiceConfig customerService() {
+        return getService("customer");
+    }
+
+    @Bean
+    public ServiceConfig authorizationService() {
+        return getService("authorization");
+    }
+
+    @Bean
+    public ServiceConfig passcoderService() {
+        return getService("passcoder");
     }
 
     @Bean

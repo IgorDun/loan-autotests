@@ -1,0 +1,7 @@
+{
+  "masterPartyId": "${masterPartyId}",
+  "slavePartyId": "${slavePartyId}",
+  "relationTypeCode": "${relationTypeCode}",
+  "extCode": "${extCode}",
+  "state": "${state: 'NONE'}"
+}

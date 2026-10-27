@@ -1,0 +1,10 @@
+{
+  "id": "${id}",
+  "category": "${category: 'POINT'}",
+  "externalCode": "${externalCode}",
+  "inn": "${inn}",
+  "name": "${name}",
+  "nameOfficial": "${nameOfficial}",
+  "online": "${online: false}",
+  "regDate": "${regDate}"
+}

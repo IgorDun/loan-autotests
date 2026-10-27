@@ -1,0 +1,9 @@
+{
+  "masterPartyId": "${masterPartyId}",
+  "slavePartyId": "${slavePartyId}",
+  "relationTypeCode": "${relationTypeCode: 'POINT_ACCREDITATION'}",
+  "extCode": "${extCode}",
+  "accreditationType": "${accreditationType: 'OFFLINE'}",
+  "goodsDelivery": "${goodsDelivery}",
+  "state": "${state: 'YES'}"
+}

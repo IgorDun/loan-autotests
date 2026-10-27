@@ -1,6 +1,0 @@
-{
-  "paramTypeId": "${paramTypeId}",
-  "paramValue": "${paramValue}",
-  "settingSubjectId": "${settingSubjectId}",
-  "startTime": "${startTime:DateUtils.nowDateTimeWithZ()}"
-}

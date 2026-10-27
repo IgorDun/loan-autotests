@@ -1,8 +1,0 @@
-{
-  "creationChannel": "${creationChannel}",
-  "partyId": "${partyId}",
-  "processCode": "${processCode}",
-  "settingSubjectId": "${settingSubjectId}",
-  "subjectType": "${subjectType}",
-  "linkedProviderId": "${linkedProviderId}"
- }

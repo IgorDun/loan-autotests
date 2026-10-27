@@ -41,7 +41,11 @@ public class CucumberGlue {
             return;
         }
         testDataGenerated = true;
-        log.info("Settings:\n{}", jsonUtils.prettify(startData.getSettings()));
+        if (startDataConfig.needCreatePartners()) {
+            log.info("Partners:\n{}", jsonUtils.prettify(startData.getPartners()));
+        }
+        log.info("Organizations:\n{}", jsonUtils.prettify(startData.getOrganizations()));
+        log.info("Employees:\n{}", jsonUtils.prettify(startData.getEmployees()));
     }
 
     @After(order = 0)

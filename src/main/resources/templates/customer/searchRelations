@@ -1,0 +1,5 @@
+{
+  "masterPartyId": "${masterPartyId}",
+  "slavePartyId": "${slavePartyId}",
+  "relationCode": "${relationTypeCode}"
+}

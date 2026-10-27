@@ -1,0 +1,4 @@
+{
+  "clientId": "${clientId}",
+  "state": "${state: 'APPROVED'}"
+}

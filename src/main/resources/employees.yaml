@@ -1,0 +1,59 @@
+#######################################
+# Сотрудники. Группа (ключ) — команда; startData.keys фильтрует группы по префиксу.
+# Сотрудник ищется по логину: найден — обновляется, не найден — создаётся вместе с учётной записью.
+# Маска телефона-логина: 99999CCNNN, где CC — номер команды, NNN — порядковый номер.
+#
+# - info:                  карточка (login, name, surname, patronymic, birthday, phoneNumber)
+#   password:              пароль; сбрасывается через SMS-код, если учётная запись требует смены
+#   partyOrgExternalCode:  сотрудник организации (или partyPartnerCode — сотрудник партнёра)
+#   roles, creationChannel: роли и канал в сервисе авторизации
+#   accreditations:        код партнёра → код сотрудника у партнёра
+#   linkSeller:            организации, где сотрудник оформляет продажи
+#   linkManager:           организации, за которые сотрудник отвечает как менеджер
+#######################################
+employees:
+  TEAM01:
+    - info:
+        login: '9999901001'
+        phoneNumber: '9999901001'
+        name: Иван
+        surname: Продавцов
+        patronymic: Петрович
+        birthday: '1995-04-30'
+      password: Autotest01!
+      partyOrgExternalCode: '11010001'
+      roles:
+        - SELLER
+      creationChannel: OFFLINE
+      accreditations:
+        ALFA: ALFA-EMP-1001
+        BETA: BETA-EMP-1001
+      linkSeller:
+        - '11010001'
+
+    - info:
+        login: '9999901002'
+        phoneNumber: '9999901002'
+        name: Мария
+        surname: Менеджерова
+        patronymic: Сергеевна
+        birthday: '1990-11-12'
+      password: Autotest01!
+      partyOrgExternalCode: '33010001'
+      roles:
+        - MANAGER
+      linkManager:
+        - '22010001'
+        - '33010001'
+
+    - info:
+        login: '9999901003'
+        phoneNumber: '9999901003'
+        name: Олег
+        surname: Партнёров
+        patronymic: Игоревич
+        birthday: '1988-07-07'
+      password: Autotest01!
+      partyPartnerCode: ALFA
+      roles:
+        - PARTNER_OPERATOR

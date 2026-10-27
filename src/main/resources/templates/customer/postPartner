@@ -1,0 +1,11 @@
+{
+  "id": "${id}",
+  "code": "${code}",
+  "category": "${category: 'PARTNER'}",
+  "state": "${state: 'ACTIVE'}",
+  "name": "${name}",
+  "nameOfficial": "${nameOfficial}",
+  "inn": "${inn}",
+  "kpp": "${kpp}",
+  "bik": "${bik}"
+}

@@ -1,0 +1,5 @@
+{
+  "addressTypeCode": "${addressTypeCode}",
+  "address": "${address}",
+  "regionCode": "${regionCode: '7700000000000'}"
+}

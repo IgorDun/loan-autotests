@@ -12,7 +12,9 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Переключатели стартовых данных: start-data.generate и start-data.keys (фильтр групп в YAML).
+ * Переключатели стартовых данных: startData.generate (организации и сотрудники),
+ * startData.generatePartners (справочник партнёров, обычно уже есть на стенде)
+ * и startData.keys (фильтр групп в YAML по префиксу ключа команды).
  */
 @Getter
 @Setter
@@ -26,12 +28,19 @@ public class StartDataConfig {
     @Accessors(chain = true)
     public static class StartData {
         private Boolean generate;
+        private Boolean generatePartners;
         private Set<String> keys;
     }
 
     public Boolean needCreate() {
         return Optional.ofNullable(this.startData)
                 .map(StartData::getGenerate)
+                .orElse(false);
+    }
+
+    public Boolean needCreatePartners() {
+        return Optional.ofNullable(this.startData)
+                .map(StartData::getGeneratePartners)
                 .orElse(false);
     }
 

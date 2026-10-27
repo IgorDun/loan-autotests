@@ -32,12 +32,12 @@ public class DatabaseConfiguration {
      * Пример бина JdbcTemplate для конкретного сервиса. Остальные базы доступны через {@link #getDb(String, String)}.
      *
      * @param envSettings настройки окружения
-     * @return JdbcTemplate базы сервиса settings
+     * @return JdbcTemplate базы сервиса customer
      */
     @Bean
     @Lazy
-    public JdbcTemplate settingsDb(EnvSettings envSettings) {
-        return getDb("settings", envSettings.getInventoryName());
+    public JdbcTemplate customerDb(EnvSettings envSettings) {
+        return getDb("customer", envSettings.getInventoryName());
     }
 
     /**

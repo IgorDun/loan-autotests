@@ -1,0 +1,79 @@
+#######################################
+# Дерево организаций. Группа (ключ) — команда; startData.keys фильтрует группы по префиксу.
+#
+# Уровни создаются снизу вверх, потому что родитель ссылается на дочерние организации:
+#   POINT → POINT_GROUP → OFFICE → OFFICE_GROUP → NETWORK → NETWORK_GROUP
+#
+# externalCode — постоянный ключ организации. Повторный прогон находит её по коду и обновляет.
+# Маска кода: TTCCNNNN, где TT — тип (11 точка, 22 группа точек, 33 офис, 44 сеть),
+# CC — номер команды, NNNN — порядковый номер. Так команды не пересекаются по данным.
+#
+# - info:            карточка организации (category, externalCode, inn, name, nameOfficial, regDate, online)
+#   addresses:       адреса пересоздаются по YAML
+#   accreditations:  коды организации у партнёров; type по умолчанию из online, для ONLINE goodsDelivery=OFFICE
+#   childOrgExternalCodes: дочерние организации уровнем ниже
+#######################################
+organizations:
+  TEAM01:
+    - info:
+        category: POINT
+        externalCode: '11010001'
+        inn: '7700100001'
+        name: Автотест точка 1
+        nameOfficial: Автотест точка 1
+        regDate: '2020-01-15'
+        online: false
+      addresses:
+        - type: FACT
+          inline: г Москва, ул Тестовая, д 1
+      accreditations:
+        - partner: ALFA
+          extCode: A-11010001
+        - partner: BETA
+          extCode: B-11010001
+
+    - info:
+        category: POINT
+        externalCode: '11010002'
+        inn: '7700100002'
+        name: Автотест интернет-магазин
+        nameOfficial: Автотест интернет-магазин
+        regDate: '2021-03-01'
+        online: true
+      accreditations:
+        - partner: ALFA
+          extCode: A-11010002
+
+    - info:
+        category: POINT_GROUP
+        externalCode: '22010001'
+        inn: '7700100003'
+        name: Автотест группа точек
+        nameOfficial: Автотест группа точек
+        regDate: '2020-01-10'
+      childOrgExternalCodes:
+        - '11010001'
+        - '11010002'
+
+    - info:
+        category: OFFICE
+        externalCode: '33010001'
+        inn: '7700100004'
+        name: Автотест офис
+        nameOfficial: Автотест офис
+        regDate: '2019-06-01'
+      addresses:
+        - type: LEGAL
+          inline: г Москва, ул Тестовая, д 10
+      childOrgExternalCodes:
+        - '22010001'
+
+    - info:
+        category: NETWORK
+        externalCode: '44010001'
+        inn: '7700100005'
+        name: Автотест сеть
+        nameOfficial: Автотест сеть
+        regDate: '2018-02-01'
+      childOrgExternalCodes:
+        - '33010001'

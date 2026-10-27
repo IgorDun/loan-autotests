@@ -1,0 +1,12 @@
+{
+  "id": "${id}",
+  "login": "${login}",
+  "name": "${name}",
+  "surname": "${surname}",
+  "patronymic": "${patronymic}",
+  "birthday": "${birthday}",
+  "phoneNumber": "${phoneNumber}",
+  "position": "${position: 'Специалист'}",
+  "category": "${category: 'EMP'}",
+  "state": "${state: 'ACTIVE'}"
+}
