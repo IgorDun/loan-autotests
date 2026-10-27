@@ -1,0 +1,5 @@
+{
+  "title": "${title}",
+  "category": "${category: "laptops"}",
+  "price": ${price: RandomUtils.randomInt(100, 999)}
+}

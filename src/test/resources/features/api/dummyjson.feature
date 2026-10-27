@@ -4,10 +4,10 @@
 
   @smoke
   Сценарий: Авторизация и получение профиля по токену
-    * dummyjson > Отправляю POST запрос на '/auth/login' с телом и сохраняю ответ как 'login':
-      """
-      {"username": "emilys", "password": "emilyspass", "expiresInMins": 5}
-      """
+    * dummyjson > Отправляю POST запрос на '/auth/login' по шаблону 'dummyjson/login' и сохраняю ответ как 'login':
+      | username      | emilys     |
+      | password      | emilyspass |
+      | expiresInMins | 5          |
     * Проверяю, что код ответа 'login' равен 200
     * Сохраняю объект из json 'login' по пути:
       | token | $.accessToken |
@@ -24,12 +24,11 @@
       | $.limit          | 5      |
       | $.products[0].id | \d+    |
 
-  Сценарий: Создание товара из таблицы полей
+  Сценарий: Создание товара по шаблону
     * Сохраняю значения в переменную:
       | title | Ноутбук-@{RandomUtils.randomInt(1000, 9999)} |
-    * dummyjson > Отправляю POST запрос на '/products/add' с полями и сохраняю ответ как 'created':
-      | title    | ${title} |
-      | category | laptops  |
+    * dummyjson > Отправляю POST запрос на '/products/add' по шаблону 'dummyjson/product' и сохраняю ответ как 'created':
+      | title | ${title} |
     * Проверяю, что код ответа 'created' равен 201
     * Проверяю в json 'created' поля:
       | $.id       | \d+      |

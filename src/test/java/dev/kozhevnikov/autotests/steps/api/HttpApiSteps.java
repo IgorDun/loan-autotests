@@ -6,6 +6,7 @@ import dev.kozhevnikov.autotests.config.ServiceConfiguration;
 import dev.kozhevnikov.autotests.utils.api.JsonUtils;
 import dev.kozhevnikov.autotests.utils.api.ServiceUtils;
 import dev.kozhevnikov.autotests.utils.common.AutoTestContext;
+import dev.kozhevnikov.autotests.utils.common.CommonUtils;
 import dev.kozhevnikov.autotests.utils.common.Enricher;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -35,6 +36,7 @@ public class HttpApiSteps {
     private final ServiceUtils serviceUtils;
     private final JsonUtils jsonUtils;
     private final Enricher enricher;
+    private final CommonUtils commonUtils;
 
     @When("^(.+) > Отправляю (GET|DELETE) запрос на '(.+)' и сохраняю ответ как '(.+)'$")
     public void sendWithoutBody(String service, String method, String path, String responseName) {
@@ -46,15 +48,15 @@ public class HttpApiSteps {
         send(service, method, path, enricher.enrich(query), null, responseName);
     }
 
-    @When("^(.+) > Отправляю (POST|PUT|PATCH) запрос на '(.+)' с телом и сохраняю ответ как '(.+)':$")
-    public void sendWithBody(String service, String method, String path, String responseName, String body) {
-        Object json = jsonUtils.toJson(jsonUtils.unify(enricher.enrich(body)));
-        send(service, method, path, null, json, responseName);
-    }
-
-    @When("^(.+) > Отправляю (POST|PUT|PATCH) запрос на '(.+)' с полями и сохраняю ответ как '(.+)':$")
-    public void sendWithFields(String service, String method, String path, String responseName, Map<String, String> fields) {
-        send(service, method, path, null, enricher.enrich(fields), responseName);
+    /**
+     * Тело собирается из шаблона {@code src/test/resources/templates/<шаблон>}: плейсхолдеры
+     * {@code ${name}} заполняются из таблицы, затем из контекста, затем значением по умолчанию {@code ${name: groovy}}.
+     */
+    @When("^(.+) > Отправляю (POST|PUT|PATCH) запрос на '(.+)' по шаблону '(.+)' и сохраняю ответ как '(.+)':$")
+    public void sendWithTemplate(String service, String method, String path, String templateName,
+                                 String responseName, Map<String, String> params) {
+        String body = commonUtils.getEnrichedTemplate(templateName, params);
+        send(service, method, path, null, jsonUtils.toJson(jsonUtils.unify(body)), responseName);
     }
 
     @Then("^Проверяю, что код ответа '(.+)' равен (\\d+)$")
