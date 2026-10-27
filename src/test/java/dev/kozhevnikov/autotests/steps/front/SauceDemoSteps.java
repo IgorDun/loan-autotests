@@ -56,16 +56,20 @@ public class SauceDemoSteps {
         page(InventoryPage.class).cartBadge().should(hasText(equalTo(String.valueOf(count))));
     }
 
-    @When("^saucedemo > Оформляю заказ на '(.+)' '(.+)' с индексом '(.+)'$")
-    public void checkout(String firstName, String lastName, String postalCode) {
+    @When("^saucedemo > Перехожу к оформлению заказа$")
+    public void openCheckout() {
         page(InventoryPage.class).cartLink().click();
         page(CartPage.class).checkout().click();
+        page(CheckoutPage.class).firstName().waitUntil(displayed());
+        log.info("Открыта форма оформления заказа");
+    }
+
+    @When("^saucedemo > Подтверждаю заказ$")
+    public void confirmOrder() {
         CheckoutPage page = page(CheckoutPage.class);
-        page.firstName().waitUntil(displayed()).sendKeys(enricher.enrich(firstName));
-        page.lastName().sendKeys(enricher.enrich(lastName));
-        page.postalCode().sendKeys(enricher.enrich(postalCode));
         page.continueButton().click();
         page.finish().waitUntil(displayed()).click();
+        log.info("Заказ подтверждён");
     }
 
     @Then("^saucedemo > Вижу подтверждение заказа '(.+)'$")
@@ -73,11 +77,7 @@ public class SauceDemoSteps {
         page(CheckoutPage.class).completeHeader().should(hasText(equalTo(enricher.enrich(text))));
     }
 
-    /**
-     * Страница создаётся поверх текущего состояния браузера, без перехода по URL.
-     * Вызов страницы через @Page сайта открыл бы базовый URL заново.
-     */
     private <T extends AbstractPage> T page(Class<T> pageType) {
-        return abstractFrontSteps.getAtlas().create(abstractFrontSteps.getWebDriver(), pageType);
+        return abstractFrontSteps.currentPage(pageType);
     }
 }

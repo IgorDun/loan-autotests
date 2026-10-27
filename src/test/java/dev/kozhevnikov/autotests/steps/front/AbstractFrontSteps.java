@@ -170,10 +170,18 @@ public class AbstractFrontSteps extends CucumberConfiguration {
         ((JavascriptExecutor) element.getWrappedDriver()).executeScript(js, element);
     }
 
+    /**
+     * Страница поверх текущего состояния браузера, без перехода по URL.
+     * Методы сайта с @Page заново открывают базовый URL, поэтому внутри сценария страницы берутся отсюда.
+     */
+    public <T extends AbstractPage> T currentPage(Class<T> pageType) {
+        return atlas.create(webDriver, pageType);
+    }
+
     public <T extends AbstractPage> void fillForm(String siteName, Class<T> pageType, Map<String, String> params) {
         params.forEach((key, value) -> {
             AbstractSite site = onSite(siteName);
-            Object field = site.onPage(pageType).getElementByAnnotationName(key);
+            Object field = currentPage(pageType).getElementByAnnotationName(key);
             String enrichedValue = enricher.enrich(value);
             if (field instanceof InputTextElement) {
                 setText(((InputTextElement) field), enrichedValue);
@@ -192,7 +200,7 @@ public class AbstractFrontSteps extends CucumberConfiguration {
             listParams.get(line).forEach((key, value) -> {
                 if (value != null) {
                     AbstractSite site = onSite(siteName);
-                    Object field = site.onPage(pageType).getElementByAnnotationNameIndex(key, lineNumber);
+                    Object field = currentPage(pageType).getElementByAnnotationNameIndex(key, lineNumber);
                     String enrichedValue = enricher.enrich(value);
                     if (field instanceof InputTextElement) {
                         setText(((InputTextElement) field), enrichedValue);
@@ -210,7 +218,7 @@ public class AbstractFrontSteps extends CucumberConfiguration {
     @SuppressWarnings("unchecked")
     public <T extends AbstractPage> void fillCollectionByIndex(String siteName, Class<T> pageType, String key, String value, int indexElement) {
         AbstractSite site = onSite(siteName);
-        Object field = site.onPage(pageType).getElementByAnnotationName(key);
+        Object field = currentPage(pageType).getElementByAnnotationName(key);
         String enrichedValue = enricher.enrich(value);
         setText(((ElementsCollection<InputTextElement>) field).get(indexElement), enrichedValue);
         LoggerFactory.getLogger(site.getClass()).info("Заполнил поле - {}, значением - {}", key, enrichedValue);
@@ -260,7 +268,7 @@ public class AbstractFrontSteps extends CucumberConfiguration {
     public <T extends AbstractPage> void checkTableRow(String siteName, Class<T> pageType, Integer row, Map<String, String> params) {
         AbstractSite site = onSite(siteName);
         params.forEach((key, value) -> {
-            List<BaseElement> field = (List<BaseElement>) site.onPage(pageType).getElementByAnnotationName(key);
+            List<BaseElement> field = (List<BaseElement>) currentPage(pageType).getElementByAnnotationName(key);
             String enrichedValue = enricher.enrich(value);
             Assertions.assertThat(field.get(row).getText())
                     .withFailMessage("Неверное значение в строке %d", row)

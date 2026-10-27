@@ -19,5 +19,10 @@
     * saucedemo > Добавляю в корзину товар 'Sauce Labs Backpack'
     * saucedemo > Добавляю в корзину товар 'Sauce Labs Bike Light'
     * saucedemo > Проверяю, что в корзине 2 товара
-    * saucedemo > Оформляю заказ на 'Иван' 'Тестов' с индексом '101000'
+    * saucedemo > Перехожу к оформлению заказа
+    * saucedemo > Заполняю анкету:
+      | Имя             | Иван   |
+      | Фамилия         | Тестов |
+      | Почтовый индекс | 101000 |
+    * saucedemo > Подтверждаю заказ
     * saucedemo > Вижу подтверждение заказа 'Thank you for your order!'

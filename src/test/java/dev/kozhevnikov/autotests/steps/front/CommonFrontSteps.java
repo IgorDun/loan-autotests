@@ -21,6 +21,7 @@ import dev.kozhevnikov.autotests.utils.common.WaitUtils;
 import dev.kozhevnikov.autotests.web.elements.InputTextElement;
 import dev.kozhevnikov.autotests.web.elements.BaseElement;
 import dev.kozhevnikov.autotests.web.pages.AbstractPage;
+import dev.kozhevnikov.autotests.web.pages.saucedemo.CheckoutPage;
 import dev.kozhevnikov.autotests.web.sites.Sites;
 
 import java.io.IOException;
@@ -107,6 +108,21 @@ public class CommonFrontSteps {
                 .findElementByName(text)
                 .clickAndSubmit();
         log.info("Ввел текст '{}' в поле '{}' с выбором", text, element);
+    }
+
+    /**
+     * Заполняет форму сайта таблицей «название поля → значение». Поле ищется по @Name на странице формы,
+     * тип поля определяет действие: ввод текста, чекбокс или выбор из списка.
+     */
+    @When("^(.+) > Заполняю анкету:$")
+    public void fillForm(String siteName, Map<String, String> params) {
+        Class<? extends AbstractPage> page;
+        if (siteName.equals(Sites.SAUCE_DEMO.getName())) {
+            page = CheckoutPage.class;
+        } else {
+            throw new AutotestException(String.format("Не удалось заполнить анкету: неподдерживаемый UI '%s'", siteName));
+        }
+        abstractFrontSteps.fillForm(siteName, page, params);
     }
 
     @When("^(.+) > Получаю UUID из текущего URL$")
