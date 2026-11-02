@@ -1,0 +1,13 @@
+Отправлен запрос:
+URI: https://dummyjson.com/products/0
+Port: 443
+Timeout: 15000
+Method: GET
+Headers: {content-type=application/json;charset=utf-8}
+Query params: null
+Body: null
+
+Получен ответ:
+Status code: 404
+Headers: {Date=Mon, 02 Nov 2026 13:16:09 GMT, Content-Type=application/json; charset=utf-8, Content-Length=43, Connection=keep-alive, access-control-allow-credentials=true, etag=W/"2b-IQyQdFvJMIROTqQVG2bK4ASsAqg", strict-transport-security=max-age=15552000; includeSubDomains, vary=Origin, Accept-Encoding, x-content-type-options=nosniff, x-dns-prefetch-control=off, x-download-options=noopen, x-frame-options=SAMEORIGIN, x-ratelimit-limit=100, x-ratelimit-remaining=99, x-ratelimit-reset=1793625370, x-xss-protection=1; mode=block, cf-cache-status=DYNAMIC, Nel={"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}, Report-To={"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=XW97BGxAgL64lXClBCz0S%2FSa%2BIE2P5BcbKqtLP5MpoVmDh2JHd4l45B39VbxJ77hUrt5kRyDNk0wqTA180ItCNmwF5s35noSlkkA1CHtuuny%2FgZOYJulhMHOaTV%2FfuBz"}]}, Server=cloudflare, CF-RAY=a543697cfd8abd97-LAX}
+Body: {message=Product with id '0' not found}
