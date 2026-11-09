@@ -1,0 +1,13 @@
+Отправлен запрос:
+URI: https://dummyjson.com/auth/login
+Port: 443
+Timeout: 15000
+Method: POST
+Headers: null
+Query params: null
+Body: {"username":"emilys","password":"emilyspass","expiresInMins":5}
+
+Получен ответ:
+Status code: 200
+Headers: {Date=Mon, 09 Nov 2026 13:42:13 GMT, Content-Type=application/json; charset=utf-8, Transfer-Encoding=chunked, Connection=keep-alive, access-control-allow-credentials=true, etag=W/"3a2-OmX7g+zQC5IMCwrOMtVl9dRWyu0", Set-Cookie=accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3OTQyMzE3MzMsImV4cCI6MTc5NDIzMjAzM30.rxY-1G7UjjxSxgRyargQfzaNcfpGeOMgNcUh8X5ARyg; Max-Age=300; Path=/; Expires=Mon, 09 Nov 2026 13:47:13 GMT; HttpOnly; Secure, strict-transport-security=max-age=15552000; includeSubDomains, vary=Origin, Accept-Encoding, x-content-type-options=nosniff, x-dns-prefetch-control=off, x-download-options=noopen, x-frame-options=SAMEORIGIN, x-ratelimit-limit=100, x-ratelimit-remaining=99, x-ratelimit-reset=1794231743, x-xss-protection=1; mode=block, cf-cache-status=DYNAMIC, Nel={"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}, Report-To={"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=LSu7hnj4EcR1seKH1coHKP62JBPugVII0ANbQA5ytViihyho6XsZfJrlZnqyxM9%2BlK8zeWgzwg4%2F7J2bkLyTTaVyBzhiYmZao%2FVzGhC6haTzkUvubc%2F88nTFXcgK0CyA"}]}, Server=cloudflare, CF-RAY=a57d3d4e7d2c32c9-IAD}
+Body: {accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3OTQyMzE3MzMsImV4cCI6MTc5NDIzMjAzM30.rxY-1G7UjjxSxgRyargQfzaNcfpGeOMgNcUh8X5ARyg, refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3OTQyMzE3MzMsImV4cCI6MTc5NjgyMzczM30.XjtmgDynIGPoVGfLTqRbZ28JhmT5GjVKxRsMXPuEKW8, id=1, username=emilys, email=emily.johnson@x.dummyjson.com, firstName=Emily, lastName=Johnson, gender=female, image=https://dummyjson.com/icon/emilys/128}

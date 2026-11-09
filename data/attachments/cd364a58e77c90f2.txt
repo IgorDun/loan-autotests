@@ -1,0 +1,13 @@
+Отправлен запрос:
+URI: https://dummyjson.com/products/add
+Port: 443
+Timeout: 15000
+Method: POST
+Headers: null
+Query params: null
+Body: {"title":"Ноутбук-6665","category":"laptops","price":272}
+
+Получен ответ:
+Status code: 201
+Headers: {Date=Mon, 09 Nov 2026 13:42:15 GMT, Content-Type=application/json; charset=utf-8, Content-Length=73, Connection=keep-alive, access-control-allow-credentials=true, etag=W/"49-qKnG12lT1jXbyi6QnnFUF40poxo", strict-transport-security=max-age=15552000; includeSubDomains, vary=Origin, Accept-Encoding, x-content-type-options=nosniff, x-dns-prefetch-control=off, x-download-options=noopen, x-frame-options=SAMEORIGIN, x-ratelimit-limit=100, x-ratelimit-remaining=97, x-ratelimit-reset=1794231743, x-xss-protection=1; mode=block, cf-cache-status=DYNAMIC, Nel={"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}, Report-To={"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2B3OzmGwCursu5%2FCAOVVG6hSuhE4lKUx%2FTPO5JXTnxO1FQZZHnJfT%2B3TpCgtMgalSWxrv5wgS9hq6MOp9qqIm1d%2Be2WJ9tR6S2xEwmxHX24NvOV1NJx8b%2Bi8P2JR8gDc%2B"}]}, Server=cloudflare, CF-RAY=a57d3d5b3c1732c9-IAD}
+Body: {id=195, title=Ноутбук-6665, price=272, category=laptops}

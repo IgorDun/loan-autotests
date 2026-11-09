@@ -1,0 +1,2 @@
+Браузер успешно запущен:
+ChromeDriver: chrome on linux (a10863092ac419ead1154dcdb2761e84)

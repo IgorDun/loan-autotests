@@ -1,1 +1,0 @@
-Extracting driver from compressed file chromedriver-linux64.zip
