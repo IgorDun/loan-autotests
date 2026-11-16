@@ -1,0 +1,13 @@
+Отправлен запрос:
+URI: https://dummyjson.com/products/add
+Port: 443
+Timeout: 15000
+Method: POST
+Headers: null
+Query params: null
+Body: {"title":"Ноутбук-4756","category":"laptops","price":665}
+
+Получен ответ:
+Status code: 201
+Headers: {Date=Mon, 16 Nov 2026 13:26:29 GMT, Content-Type=application/json; charset=utf-8, Content-Length=73, Connection=keep-alive, access-control-allow-credentials=true, etag=W/"49-tludj2nRS1V/t7eBIp+4BHVshQA", strict-transport-security=max-age=15552000; includeSubDomains, vary=Origin, Accept-Encoding, x-content-type-options=nosniff, x-dns-prefetch-control=off, x-download-options=noopen, x-frame-options=SAMEORIGIN, x-ratelimit-limit=100, x-ratelimit-remaining=98, x-ratelimit-reset=1794835599, x-xss-protection=1; mode=block, cf-cache-status=DYNAMIC, Report-To={"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=w8IEpIDTPMDpXtKR08Ug3JwNjJr0du%2F8rhTgYftvURs6XuveMdXGp17no0%2BfSaZlsHO0DS33swd4S3KC7yEHgHb5L%2FZTSC7eojg6j7dwmj8QWD02IoaiB7pNYs5G%2FG%2FK"}]}, Nel={"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}, Server=cloudflare, CF-RAY=a5b6d3e13d6be7fd-ORD}
+Body: {id=195, title=Ноутбук-4756, price=665, category=laptops}
